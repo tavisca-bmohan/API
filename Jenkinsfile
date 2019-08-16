@@ -7,7 +7,7 @@ pipeline
 		{ 
 			steps 
 			{ 
-		 		sh 'dotnet build API.sln -p:Configration=release -v:n' 	
+		 		powershell '''dotnet build API.sln -p:Configration=release -v:n''' 	
 			} 
 		} 
 
@@ -15,7 +15,7 @@ pipeline
 		{ 
 			steps 
 			{ 
-				sh 'dotnet test'
+				powershell '''dotnet test'''
 			} 
 		}
 
@@ -23,7 +23,7 @@ pipeline
 		{ 
 			steps 
 			{ 
-				sh 'dotnet publish -c Release'
+				powershell ''dotnet publish -c Release'''
 			} 
 		} 
 		
@@ -31,7 +31,7 @@ pipeline
 		{
             		steps 
 			{	
-                		sh 'zip  Api.zip -r API/bin/Release/netcoreapp2.2'
+                		powershell '''zip  Api.zip -r API/bin/Release/netcoreapp2.2'''
             		}
         	}
 	} 
