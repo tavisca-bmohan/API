@@ -30,7 +30,7 @@ pipeline
 		stage('Compress') 
 		{
             		steps {	
-                		compress-archive API\\bin\\Release\\netcoreapp2.2\\publish\\* artifactFiles.zip -Update 
+                		sh 'compress-archive API\\bin\\Release\\netcoreapp2.2\\publish\\* artifactFiles.zip -Update' 
             		      }
         	}
 		
