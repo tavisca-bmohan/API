@@ -8,7 +8,7 @@ pipeline
 			steps 
 			{ 
 		 
-				bat 'dotnet build API.sln -p:Configration=release -v:n' 
+				sh 'dotnet build API.sln -p:Configration=release -v:n' 
 					
 			} 
 		} 
@@ -18,7 +18,7 @@ pipeline
 			steps 
 			{ 
 				
-				bat 'dotnet test'
+				sh 'dotnet test'
 				
 			} 
 		}
@@ -28,7 +28,7 @@ pipeline
 			steps 
 			{ 
 
-				bat 'dotnet publish'
+				sh 'dotnet publish'
 				
 			} 
 		} 
