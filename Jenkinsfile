@@ -1,22 +1,14 @@
 pipeline 
 { 
 	agent any 
-	parameters 
-	{ 
-		string(name: 'GIT_HTTPS_PATH', defaultValue: 'https://github.com/tavisca-bmohan/API.git')  
-		string(name: 'API_SOLUTION', defaultValue: 'API.sln') 
-		string(name: 'TEST_PATH', defaultValue: 'UnitTestsForAPI/UnitTestsForAPI.csproj')
-		choice(name:'choices',choices: ['Build', 'Test']) 
-	} 
-
 	stages 
 	{ 
 		stage('Build') 
 		{ 
 			steps 
 			{ 
-				powershell ''' dotnet restore $ENV:WORKSPACE\\$($env:API_SOLUTION) --source https://api.nuget.org/v3/index.json 
-				dotnet build $ENV:WORKSPACE\\$($env:API_SOLUTION) -p:Configration=release -v:n 
+				powershell ''' dotnet restore API.sln --source https://api.nuget.org/v3/index.json 
+				dotnet build API.sln -p:Configration=release -v:n 
 					''' 
 			} 
 		} 
@@ -26,7 +18,7 @@ pipeline
 			steps 
 			{ 
 				powershell ''' echo "----------------------------Deploying Project Started-----------------------------" 
-				dotnet test ${TEST_PATH}
+				dotnet test UnitTestsForAPI/UnitTestsForAPI.csproj
 				echo "----------------------------Deploying Project Completed-----------------------------" ''' 
 			} 
 		}
@@ -35,9 +27,9 @@ pipeline
 		{ 
 			steps 
 			{ 
-				powershell ''' echo "----------------------------Deploying Project Started-----------------------------" 
-				dotnet publish $ENV:WORKSPACE\\$($env:API_SOLUTION) -c Release 
-				echo "----------------------------Deploying Project Completed-----------------------------" ''' 
+				powershell ''' echo "----------------------------Publish Project Started-----------------------------" 
+				dotnet publish API.sln -c Release 
+				echo "----------------------------Publish Project Completed-----------------------------" ''' 
 			} 
 		} 
 
