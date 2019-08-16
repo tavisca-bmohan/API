@@ -7,9 +7,9 @@ pipeline
 		{ 
 			steps 
 			{ 
-				powershell ''' dotnet restore API.sln --source https://api.nuget.org/v3/index.json 
-				dotnet build API.sln -p:Configration=release -v:n 
-					''' 
+		 
+				bat 'dotnet build API.sln -p:Configration=release -v:n' 
+					
 			} 
 		} 
 
@@ -17,9 +17,9 @@ pipeline
 		{ 
 			steps 
 			{ 
-				powershell ''' echo "----------------------------Deploying Project Started-----------------------------" 
-				dotnet test
-				echo "----------------------------Deploying Project Completed-----------------------------" ''' 
+				
+				bat 'dotnet test'
+				
 			} 
 		}
 
@@ -27,9 +27,9 @@ pipeline
 		{ 
 			steps 
 			{ 
-				powershell ''' echo "----------------------------Publish Project Started-----------------------------" 
-				dotnet publish
-				echo "----------------------------Publish Project Completed-----------------------------" ''' 
+
+				bat 'dotnet publish'
+				
 			} 
 		} 
 
