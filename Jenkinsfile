@@ -31,7 +31,7 @@ pipeline
 		{
             		steps 
 			{	
-                		powershell '''compress-archive API/bin/Release/netcoreapp2.2/publish/* artifactFiles.zip -Update''' 
+                		sh 'zip  Api.zip API/bin/Release/netcoreapp2.2/publish/* artifactFiles.zip -Update''' 
             		}
         	}
 		
@@ -39,10 +39,10 @@ pipeline
 		{
             		steps 
 			{              
-                		powershell '''
-				expand-archive artifactFiles.zip C:/Users/bmohan/Desktop/unzip -Force
-                		dotnet API.dll
-				'''               
+                		
+				sh 'unzip Api.zip C:/Users/bmohan/Desktop'
+                		sh 'dotnet run API.dll'
+				             
             		}
         	}
 		
