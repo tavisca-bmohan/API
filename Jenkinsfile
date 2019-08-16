@@ -23,7 +23,7 @@ pipeline
 		{ 
 			steps 
 			{ 
-				powershell ''dotnet publish -c Release'''
+				powershell '''dotnet publish -c Release'''
 			} 
 		} 
 		
