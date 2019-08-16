@@ -6,13 +6,14 @@ pipeline
 		string(name: 'GIT_HTTPS_PATH', defaultValue: 'https://github.com/tavisca-bmohan/API.git')  
 		string(name: 'API_SOLUTION', defaultValue: 'API.sln') 
 		string(name: 'TEST_PATH', defaultValue: 'UnitTestsForAPI/UnitTestsForAPI.csproj')
-		choice(name:'choices',choices: ['Both','Build', 'Test']) 
+		choice(name:'choices',choices: ['Build', 'Test']) 
 	} 
 
 	stages 
 	{ 
 		stage('Build') 
 		{ 
+			when{ expression {params.choices == 'Build' || params.choices == 'Test'}}
 			steps 
 			{ 
 				powershell ''' dotnet restore $(API_SOLUTION) --source https://api.nuget.org/v3/index.json 
@@ -31,7 +32,7 @@ pipeline
 			} 
 		}
 
-		stage('Deploy') 
+		stage('Publish') 
 		{ 
 			steps 
 			{ 
