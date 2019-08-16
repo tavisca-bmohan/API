@@ -18,7 +18,7 @@ pipeline
 			steps 
 			{ 
 				powershell ''' echo "----------------------------Deploying Project Started-----------------------------" 
-				dotnet test UnitTestsForAPI/UnitTestsForAPI.csproj
+				dotnet test
 				echo "----------------------------Deploying Project Completed-----------------------------" ''' 
 			} 
 		}
@@ -28,7 +28,7 @@ pipeline
 			steps 
 			{ 
 				powershell ''' echo "----------------------------Publish Project Started-----------------------------" 
-				dotnet publish API.sln -c Release 
+				dotnet publish
 				echo "----------------------------Publish Project Completed-----------------------------" ''' 
 			} 
 		} 
