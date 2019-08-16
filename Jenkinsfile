@@ -27,13 +27,7 @@ pipeline
 			} 
 		} 
 		
-		stage('Compress') 
-		{
-            		steps 
-			{	
-                		powershell '''zip  Api.zip -r API/bin/Release/netcoreapp2.2'''
-            		}
-        	}
+		
 	} 
 	
 }
