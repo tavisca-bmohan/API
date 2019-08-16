@@ -39,7 +39,7 @@ pipeline
 		{
             		steps 
 			{              
-				sh 'unzip Api.zip -d Unzip/ -y'        
+				sh 'unzip -o API/bin/Release/netcoreapp2.2/Api.zip -d C:/Users/bmohan/Desktop/'        
             		}
         	}
 		
