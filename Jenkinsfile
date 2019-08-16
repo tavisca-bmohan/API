@@ -39,8 +39,7 @@ pipeline
 		{
             		steps 
 			{
-                		powershell '''expand-archive artifactFiles.zip C:\\Users\\bmohan\\Desktop\\unzip -Force
-                			dotnet API.dll'''
+                		powershell '''expand-archive artifactFiles.zip C:\\Users\\bmohan\\Desktop\\unzip -Force'''
             		}
         	}	
 	} 
