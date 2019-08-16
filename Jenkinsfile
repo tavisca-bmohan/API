@@ -39,7 +39,7 @@ pipeline
 		{
             		steps 
 			{              
-				sh 'unzip Api.zip -d Unzip/'        
+				sh 'unzip Api.zip -d Unzip/ -y'        
             		}
         	}
 		
