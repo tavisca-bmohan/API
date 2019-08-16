@@ -23,7 +23,7 @@ pipeline
 		{ 
 			steps 
 			{ 
-				sh 'dotnet publish'
+				sh 'dotnet publish -c Release'
 			} 
 		} 
 		
@@ -31,7 +31,7 @@ pipeline
 		{
             		steps 
 			{	
-                		sh 'zip  Api.zip API/bin/Release/netcoreapp2.2/API.dll'
+                		sh 'zip  Api.zip -r API/bin/Release/netcoreapp2.2'
             		}
         	}
 		
@@ -41,7 +41,7 @@ pipeline
 			{              
                 		
 				sh 'unzip Api.zip C:/Users/bmohan/Desktop'
-                		sh 'dotnet run API.dll'
+                		sh 'dotnet API.dll'
 				             
             		}
         	}
