@@ -7,9 +7,7 @@ pipeline
 		{ 
 			steps 
 			{ 
-		 
-				sh 'dotnet build API.sln -p:Configration=release -v:n' 
-					
+		 		sh 'dotnet build API.sln -p:Configration=release -v:n' 	
 			} 
 		} 
 
@@ -17,9 +15,7 @@ pipeline
 		{ 
 			steps 
 			{ 
-				
 				sh 'dotnet test'
-				
 			} 
 		}
 
@@ -27,21 +23,17 @@ pipeline
 		{ 
 			steps 
 			{ 
-
 				sh 'dotnet publish'
-				
 			} 
 		} 
-
+		
+		stage('Compress') 
+		{
+            		steps {	
+                		compress-archive API\\bin\\Release\\netcoreapp2.2\\publish\\* artifactFiles.zip -Update 
+            		      }
+        	}
 		
 	} 
 	
-	post
-    {
-        always{
-         archiveArtifacts '**'
-            sh 'dotnet API/bin/Debug/netcoreapp2.2/API.dll'
-	}
-            
-        }
 }
