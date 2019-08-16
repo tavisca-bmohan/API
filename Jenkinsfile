@@ -39,10 +39,7 @@ pipeline
 		{
             		steps 
 			{              
-                		
-				sh 'unzip Api.zip -d Unzip/'
-                		sh 'dotnet API.dll'
-				             
+				sh 'unzip Api.zip -d Unzip/'        
             		}
         	}
 		
