@@ -40,7 +40,7 @@ pipeline
             		steps 
 			{              
                 		
-				sh 'unzip Api.zip -d C:/Users/bmohan/Desktop'
+				sh 'unzip Api.zip -d Unzip/'
                 		sh 'dotnet API.dll'
 				             
             		}
