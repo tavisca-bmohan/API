@@ -40,7 +40,7 @@ pipeline
     {
         always{
          archiveArtifacts '**'
-            bat 'dotnet API\bin\Debug\netcoreapp2.2/API.dll'
+            sh 'dotnet API\bin\Debug\netcoreapp2.2/API.dll'
             
         }
 }
