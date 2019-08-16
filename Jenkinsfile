@@ -31,7 +31,7 @@ pipeline
 		{
             		steps 
 			{	
-                		sh 'zip  Api.zip API/bin/Release/netcoreapp2.2/publish/* artifactFiles.zip -Update'
+                		sh 'zip  Api.zip API/bin/Release/netcoreapp2.2/API.dll'
             		}
         	}
 		
