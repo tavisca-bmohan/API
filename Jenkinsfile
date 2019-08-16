@@ -13,11 +13,10 @@ pipeline
 	{ 
 		stage('Build') 
 		{ 
-			when{ expression {params.choices == 'Build' || params.choices == 'Test'}}
 			steps 
 			{ 
-				powershell ''' dotnet restore $(API_SOLUTION) --source https://api.nuget.org/v3/index.json 
-				dotnet build $(API_SOLUTION) -p:Configration=release -v:n 
+				powershell ''' dotnet restore $ENV:WORKSPACE\\$($env:API_SOLUTION) --source https://api.nuget.org/v3/index.json 
+				dotnet build $ENV:WORKSPACE\\$($env:API_SOLUTION) -p:Configration=release -v:n 
 					''' 
 			} 
 		} 
@@ -37,7 +36,7 @@ pipeline
 			steps 
 			{ 
 				powershell ''' echo "----------------------------Deploying Project Started-----------------------------" 
-				dotnet publish $(API_SOLUTION) -c Release 
+				dotnet publish $ENV:WORKSPACE\\$($env:API_SOLUTION) -c Release 
 				echo "----------------------------Deploying Project Completed-----------------------------" ''' 
 			} 
 		} 
