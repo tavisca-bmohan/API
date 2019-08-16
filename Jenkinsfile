@@ -34,15 +34,6 @@ pipeline
                 		sh 'zip  Api.zip -r API/bin/Release/netcoreapp2.2'
             		}
         	}
-		
-		stage('Deploy') 
-		{
-            		steps 
-			{              
-				sh 'unzip -o API/bin/Release/netcoreapp2.2/Api.zip -d C:/Users/bmohan/Desktop/'        
-            		}
-        	}
-		
 	} 
 	
 }
