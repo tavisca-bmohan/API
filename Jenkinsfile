@@ -7,7 +7,7 @@ pipeline
 		{
             		steps
 			{
-                    		sh 'dotnet restore API.sln --source https://api.nuget.org/v3/index.json'
+                    		bat ''dotnet restore API.sln --source https://api.nuget.org/v3/index.json''
             		}
         	}
 		
@@ -15,7 +15,7 @@ pipeline
 		{ 
 			steps 
 			{ 
-		 		sh 'dotnet build API.sln -p:Configration=release -v:n' 	
+		 		bat ''dotnet build API.sln -p:Configration=release -v:n'' 	
 			} 
 		} 
 
@@ -23,7 +23,7 @@ pipeline
 		{ 
 			steps 
 			{ 
-				sh 'dotnet test'
+				bat ''dotnet test''
 			} 
 		}
 
@@ -31,7 +31,7 @@ pipeline
 		{ 
 			steps 
 			{ 
-				sh 'dotnet publish -c Release'
+				bat ''dotnet publish -c Release''
 			} 
 		} 
 		
@@ -39,7 +39,7 @@ pipeline
 		{
             		steps 
 			{
-                		sh 'compress-archive API\\bin\\Release\\netcoreapp2.2\\publish\\* artifactFiles.zip -Update'
+                		bat ''compress-archive API\\bin\\Release\\netcoreapp2.2\\publish\\* artifactFiles.zip -Update''
             		}
         	}
        
@@ -47,7 +47,7 @@ pipeline
 		{
             		steps 
 			{
-                		sh 'expand-archive artifactFiles.zip C:\\Users\\bmohan\\Desktop\\unzip -Force'
+                		bat ''expand-archive artifactFiles.zip C:\\Users\\bmohan\\Desktop\\unzip -Force''
             		}
         	}	
 	} 
