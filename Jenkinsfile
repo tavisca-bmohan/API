@@ -8,7 +8,7 @@ pipeline
 		{ 
 			steps 
 			{ 
-		 		sh 'dotnet build API.sln -p:Configration=release -v:n' 	
+		 		powwershell(script: 'dotnet build API.sln -p:Configration=release -v:n')	
 			} 
 		} 
 
@@ -16,7 +16,7 @@ pipeline
 		{ 
 			steps 
 			{ 
-				sh 'dotnet test'
+				powwershell(script: 'dotnet test')
 			} 
 		}
 
@@ -24,7 +24,7 @@ pipeline
 		{ 
 			steps 
 			{ 
-				sh 'dotnet publish -c Release'
+				powwershell(script: 'dotnet publish -c Release')
 			} 
 		} 
 		
@@ -32,7 +32,7 @@ pipeline
 		{
             		steps 
 			{
-                		sh 'compress-archive API\\bin\\Release\\netcoreapp2.2\\publish\\* artifactFiles.zip -Update'
+                		powwershell(script: 'compress-archive API\\bin\\Release\\netcoreapp2.2\\publish\\* artifactFiles.zip -Update')
             		}
         	}
        
@@ -40,7 +40,7 @@ pipeline
 		{
             		steps 
 			{
-                		sh 'expand-archive artifactFiles.zip C:\\Users\\bmohan\\Desktop\\unzip -Force'
+                		powwershell(script: 'expand-archive artifactFiles.zip C:\\Users\\bmohan\\Desktop\\unzip -Force')
             		}
         	}	
 	} 
