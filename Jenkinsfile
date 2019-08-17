@@ -60,13 +60,21 @@ pipeline
             		}
         	}
        
-        	stage('Deploy') 
+        	/*stage('Deploy') 
 		{
             		steps 
 			{
 				powershell '''expand-archive artifactFiles.zip ${PATH_TO_UNZIP_ARTIFACT} -Force'''
             		}
-        	}	
+        	}*/
+		
+		stage('Deploy') 
+		{
+            		steps 
+			{
+				powershell '''docker build -t ${API_SOLUTION}'''
+            		}
+        	}
 	} 
 	
 }
