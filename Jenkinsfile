@@ -77,7 +77,7 @@ pipeline
 		{
             		steps 
 			{
-				powershell '''docker build -t ${API_SOLUTION}'''
+				powershell '''docker run dockerimage'''
             		}
         	}
 	} 
