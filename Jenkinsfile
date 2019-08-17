@@ -3,6 +3,14 @@ pipeline
 	agent any 
 	stages 
 	{ 
+		 stage('restore')
+		{
+            		steps
+			{
+                    		sh 'dotnet restore API.sln --source https://api.nuget.org/v3/index.json'
+            		}
+        	}
+		
 		stage('Build') 
 		{ 
 			steps 
