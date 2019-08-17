@@ -11,6 +11,7 @@ pipeline
 		string(name: 'PATH_TO_ARTIFACT', defaultValue: 'API/bin/Release/netcoreapp2.2/publish/*')
 		string(name: 'PATH_TO_UNZIP_ARTIFACT', defaultValue: 'C:/Users/bmohan/Desktop/unzip')
         	choice(name:'choices',choices: ['Both','Build', 'Test'])
+		string(name: 'PROJECT_NAME', defaultValue: 'API')
 	}
 	
 	stages 
@@ -48,11 +49,15 @@ pipeline
 		{ 
 			steps 
 			{ 
-				powershell '''dotnet publish -c Release'''
+				powershell '''
+				dotnet publish -c Release
+				docker build --tag=dockerimage --build-arg project_name=%PROJECT_NAME%.dll .
+				'''
+				
 			} 
 		} 
 		
-		stage('Compress') 
+		/*stage('Compress') 
 		{
             		steps 
 			{
@@ -60,7 +65,7 @@ pipeline
             		}
         	}
        
-        	/*stage('Deploy') 
+        	stage('Deploy') 
 		{
             		steps 
 			{
