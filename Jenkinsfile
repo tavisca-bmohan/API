@@ -7,6 +7,8 @@ pipeline
         	string(name: 'GIT_HTTPS_PATH', defaultValue: 'https://github.com/tavisca-bmohan/API.git')
         	string(name: 'TEST_PROJECT_PATH', defaultValue: 'UnitTestsForAPI/UnitTestsForAPI.csproj')
         	string(name: 'API_SOLUTION', defaultValue: 'API.sln')
+		string(name: 'PATH_TO_ARTIFACT', defaultValue: 'API/bin/Release/netcoreapp2.2/publish/*')
+		string(name: 'PATH_TO_UNZIP_ARTIFACT', defaultValue: 'C:/Users/bmohan/Desktop/unzip')
         	choice(name:'choices',choices: ['Both','Build', 'Test'])
 	}
 	
@@ -53,7 +55,7 @@ pipeline
 		{
             		steps 
 			{
-                		powershell '''compress-archive API\\bin\\Release\\netcoreapp2.2\\publish\\* artifactFiles.zip -Update'''
+				powershell '''compress-archive ${PATH_TO_ARTIFACT} artifactFiles.zip -Update'''
             		}
         	}
        
@@ -61,7 +63,7 @@ pipeline
 		{
             		steps 
 			{
-                		powershell '''expand-archive artifactFiles.zip C:\\Users\\bmohan\\Desktop\\unzip -Force'''
+				powershell '''expand-archive artifactFiles.zip ${PATH_TO_UNZIP_ARTIFACT} -Force'''
             		}
         	}	
 	} 
