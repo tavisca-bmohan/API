@@ -21,7 +21,7 @@ pipeline
             		steps
 			{
                     		powershell '''
-				dotnet restore ${API_SOLUTION} --source ${NUGET_PACKAGE}
+				dotnet restore ${API_SOLUTION} --source https://api.nuget.org/v3/index.json
 				'''
             		}
         	}
