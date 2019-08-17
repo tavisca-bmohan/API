@@ -43,7 +43,7 @@ pipeline
 			steps 
 			{ 
 				bat '''
-				dotnet publish -c Release -o ../publish
+				dotnet publish -c Release
 				docker build --tag=dockerimage .
 				'''
 				
