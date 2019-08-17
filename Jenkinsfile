@@ -37,7 +37,7 @@ pipeline
 		{ 
 			steps 
 			{ 
-				powershell '''dotnet test'''
+				powershell '''dotnet test ${TEST_PROJECT_PATH}'''
 			} 
 		}
 
