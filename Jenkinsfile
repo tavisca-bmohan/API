@@ -51,7 +51,7 @@ pipeline
 			{ 
 				powershell '''
 				dotnet publish -c Release
-				docker build --tag=dockerimage --build-arg project_name=%PROJECT_NAME%.dll .
+				docker build -t = dockerimage .
 				'''
 				
 			} 
