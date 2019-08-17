@@ -4,11 +4,23 @@ pipeline
 	stages 
 	{ 
 		
+		stage('restore')
+		{
+            		steps
+			{
+                    		powershell '''
+				dotnet restore $ENV:WORKSPACE\\$($env:API_SOLUTION) --source https://api.nuget.org/v3/index.json
+				'''
+            		}
+        	}
+		
 		stage('Build') 
 		{ 
 			steps 
 			{ 
-		 		sh 'dotnet build API.sln -p:Configration=release -v:n'
+				powershell '''
+		 		dotnet build API.sln -p:Configration=release -v:n
+				'''
 			} 
 		} 
 
@@ -16,7 +28,7 @@ pipeline
 		{ 
 			steps 
 			{ 
-				sh 'dotnet test'
+				powershell '''dotnet test'''
 			} 
 		}
 
@@ -24,7 +36,7 @@ pipeline
 		{ 
 			steps 
 			{ 
-				sh 'dotnet publish -c Release'
+				powershell '''dotnet publish -c Release'''
 			} 
 		} 
 		
@@ -32,7 +44,7 @@ pipeline
 		{
             		steps 
 			{
-                		sh 'compress-archive API\\bin\\Release\\netcoreapp2.2\\publish\\* artifactFiles.zip -Update'
+                		powershell '''compress-archive API\\bin\\Release\\netcoreapp2.2\\publish\\* artifactFiles.zip -Update'''
             		}
         	}
        
@@ -40,7 +52,7 @@ pipeline
 		{
             		steps 
 			{
-                		sh 'expand-archive artifactFiles.zip C:\\Users\\bmohan\\Desktop\\unzip -Force'
+                		powershell '''expand-archive artifactFiles.zip C:\\Users\\bmohan\\Desktop\\unzip -Force'''
             		}
         	}	
 	} 
