@@ -8,7 +8,7 @@ pipeline
 		{ 
 			steps 
 			{ 
-		 		bat ''dotnet build API.sln -p:Configration=release -v:n'' 	
+		 		bat 'dotnet build API.sln -p:Configration=release -v:n' 	
 			} 
 		} 
 
@@ -16,7 +16,7 @@ pipeline
 		{ 
 			steps 
 			{ 
-				bat ''dotnet test''
+				bat 'dotnet test'
 			} 
 		}
 
@@ -24,7 +24,7 @@ pipeline
 		{ 
 			steps 
 			{ 
-				bat ''dotnet publish -c Release''
+				bat 'dotnet publish -c Release'
 			} 
 		} 
 		
@@ -32,7 +32,7 @@ pipeline
 		{
             		steps 
 			{
-                		bat ''compress-archive API\\bin\\Release\\netcoreapp2.2\\publish\\* artifactFiles.zip -Update''
+                		bat 'compress-archive API\\bin\\Release\\netcoreapp2.2\\publish\\* artifactFiles.zip -Update'
             		}
         	}
        
@@ -40,7 +40,7 @@ pipeline
 		{
             		steps 
 			{
-                		bat ''expand-archive artifactFiles.zip C:\\Users\\bmohan\\Desktop\\unzip -Force''
+                		bat 'expand-archive artifactFiles.zip C:\\Users\\bmohan\\Desktop\\unzip -Force'
             		}
         	}	
 	} 
