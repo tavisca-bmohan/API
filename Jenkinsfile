@@ -9,7 +9,7 @@ pipeline
             		steps
 			{
                     		powershell '''
-				dotnet restore $ENV:WORKSPACE\\$($env:API_SOLUTION) --source https://api.nuget.org/v3/index.json
+				dotnet restore API.sln --source https://api.nuget.org/v3/index.json
 				'''
             		}
         	}
