@@ -5,33 +5,26 @@ pipeline
 	parameters 
 	{
         	string(name: 'GIT_HTTPS_PATH', defaultValue: 'https://github.com/tavisca-bmohan/API.git')
-		string(name: 'NUGET_PACKAGE', defaultValue: 'https://api.nuget.org/v3/index.json')
-        	string(name: 'API_SOLUTION', defaultValue: 'API.sln')
+		string(name: 'API_SOLUTION', defaultValue: 'API.sln')
 		string(name: 'TEST_PROJECT_PATH', defaultValue: 'UnitTestsForAPI/UnitTestsForAPI.csproj')
+		string(name: 'PROJECT_NAME', defaultValue: 'API')
+        	choice(name:'choices',choices: ['Both','Build', 'Test'])
+		
+		/*
 		string(name: 'PATH_TO_ARTIFACT', defaultValue: 'API/bin/Release/netcoreapp2.2/publish/*')
 		string(name: 'PATH_TO_UNZIP_ARTIFACT', defaultValue: 'C:/Users/bmohan/Desktop/unzip')
-        	choice(name:'choices',choices: ['Both','Build', 'Test'])
-		string(name: 'PROJECT_NAME', defaultValue: 'API')
+		*/
 	}
 	
 	stages 
 	{ 
-		
-		stage('restore')
-		{
-            		steps
-			{
-                    		powershell '''
-				dotnet restore ${API_SOLUTION} --source https://api.nuget.org/v3/index.json
-				'''
-            		}
-        	}
 		
 		stage('Build') 
 		{ 
 			steps 
 			{ 
 				powershell '''
+				dotnet restore ${API_SOLUTION} --source https://api.nuget.org/v3/index.json
 		 		dotnet build ${API_SOLUTION} -p:Configration=release -v:n
 				'''
 			} 
@@ -65,7 +58,7 @@ pipeline
             		}
         	}
        
-        	stage('Deploy') 
+        	stage('Unzip') 
 		{
             		steps 
 			{
