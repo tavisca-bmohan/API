@@ -50,8 +50,8 @@ pipeline
 			steps 
 			{ 
 				powershell '''
-				dotnet publish -c Release
-				docker build -t = dockerimage .
+				dotnet publish -c Release ../publish
+				docker build --tag = dockerimage .
 				'''
 				
 			} 
