@@ -1,6 +1,15 @@
 pipeline 
 { 
 	agent any 
+	
+	parameters 
+	{
+        	string(name: 'GIT_HTTPS_PATH', defaultValue: 'https://github.com/tavisca-bmohan/API.git')
+        	string(name: 'TEST_PROJECT_PATH', defaultValue: 'UnitTestsForAPI/UnitTestsForAPI.csproj')
+        	string(name: 'API_SOLUTION', defaultValue: 'API.sln')
+        	choice(name:'choices',choices: ['Both','Build', 'Test'])
+	}
+	
 	stages 
 	{ 
 		
@@ -9,7 +18,7 @@ pipeline
             		steps
 			{
                     		powershell '''
-				dotnet restore API.sln --source https://api.nuget.org/v3/index.json
+				dotnet restore ${API_SOLUTION} --source https://api.nuget.org/v3/index.json
 				'''
             		}
         	}
@@ -19,7 +28,7 @@ pipeline
 			steps 
 			{ 
 				powershell '''
-		 		dotnet build API.sln -p:Configration=release -v:n
+		 		dotnet build ${API_SOLUTION} -p:Configration=release -v:n
 				'''
 			} 
 		} 
