@@ -19,7 +19,7 @@ pipeline
 	stages 
 	{ 
 		
-		stage('Build') 
+		stage('Dotnet Build') 
 		{ 
 			steps 
 			{ 
@@ -29,6 +29,13 @@ pipeline
 				'''
 			} 
 		} 
+		stage('Docker Build') 
+		{ 
+			steps 
+			{ 
+				bat '''docker build --tag=dockerimage .'''
+			} 
+		}
 
 		stage('Test') 
 		{ 
@@ -38,17 +45,19 @@ pipeline
 			} 
 		}
 
-		stage('Publish') 
+		
+		stage('Docker Image Publish') 
 		{ 
 			steps 
 			{ 
 				bat '''
-				dotnet publish -c Release
-				docker build --tag=dockerimage .
+				docker login -u brijmohan123 -p Password@123
+				docker push tag dockerimage brijmohan123/api
+				docker push brijmohan123/api
 				'''
 				
 			} 
-		} 
+		}
 		
 		/*stage('Compress') 
 		{
