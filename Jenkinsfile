@@ -77,7 +77,7 @@ pipeline
 		{
             		steps 
 			{
-				powershell '''docker run dockerimage'''
+				powershell '''docker run -p 5000:80 dockerimage '''
             		}
         	}
 	} 
