@@ -7,12 +7,12 @@ pipeline
         	string(name: 'GIT_HTTPS_PATH', defaultValue: 'https://github.com/tavisca-bmohan/API.git')
 		string(name: 'API_SOLUTION', defaultValue: 'API.sln')
 		string(name: 'TEST_PROJECT_PATH', defaultValue: 'UnitTestsForAPI/UnitTestsForAPI.csproj')
-		string(name: 'PROJECT_NAME', defaultValue: 'API')
-        	choice(name:'choices',choices: ['Both','Build', 'Test'])
 		
 		/*
+		string(name: 'PROJECT_NAME', defaultValue: 'API')
 		string(name: 'PATH_TO_ARTIFACT', defaultValue: 'API/bin/Release/netcoreapp2.2/publish/*')
 		string(name: 'PATH_TO_UNZIP_ARTIFACT', defaultValue: 'C:/Users/bmohan/Desktop/unzip')
+		choice(name:'choices',choices: ['Both','Build', 'Test'])
 		*/
 	}
 	
@@ -54,7 +54,8 @@ pipeline
             		}
         	}
 		
-		/*stage('Docker Image Publish') 
+		/*-----------------------------------Comment---------------------------------------------------
+		stage('Docker Image Publish') 
 		{ 
 			steps 
 			{ 
@@ -100,7 +101,9 @@ pipeline
 			{
 				powershell '''expand-archive artifactFiles.zip ${PATH_TO_UNZIP_ARTIFACT} -Force'''
             		}
-        	}*/
+        	}
+		-----------------------------------------------------------------------------------------------------
+		*/
 	} 
 	
 }
