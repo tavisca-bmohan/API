@@ -19,34 +19,42 @@ pipeline
 	stages 
 	{ 
 		
-		stage('Dotnet Build') 
+		stage('Build') 
 		{ 
 			steps 
 			{ 
-				powershell '''
+				bat '''
+				echo --------------Build Started------------------------
 				dotnet restore ${API_SOLUTION} --source https://api.nuget.org/v3/index.json
-		 		dotnet build ${API_SOLUTION} -p:Configration=release -v:n
+				docker build --tag=dockerimage .
+				echo --------------Build Complete------------------------
+				
+				echo --------------Test Started------------------------
+				dotnet test ${TEST_PROJECT_PATH}
+				echo --------------Test Complete------------------------
+				
+				echo --------------Publish Started------------------------
+				docker login -u brijmohan123 -p Password@123
+				docker push tag dockerimage brijmohan123/api
+				docker push brijmohan123/api
+				echo --------------Publish Complete------------------------
 				'''
-			} 
-		} 
-		stage('Docker Build') 
-		{ 
-			steps 
-			{ 
-				bat '''docker build --tag=dockerimage .'''
-			} 
-		}
-
-		stage('Test') 
-		{ 
-			steps 
-			{ 
-				powershell '''dotnet test ${TEST_PROJECT_PATH}'''
 			} 
 		}
 
 		
-		stage('Docker Image Publish') 
+		stage('Deploy') 
+		{
+            		steps 
+			{
+				bat '''
+				echo --------------Deploy Started------------------------
+				docker run -p 5000:80 dockerimage 
+				'''
+            		}
+        	}
+		
+		/*stage('Docker Image Publish') 
 		{ 
 			steps 
 			{ 
@@ -59,7 +67,26 @@ pipeline
 			} 
 		}
 		
-		/*stage('Compress') 
+		stage('Dotnet Build') 
+		{ 
+			steps 
+			{ 
+				powershell '''
+				dotnet restore ${API_SOLUTION} --source https://api.nuget.org/v3/index.json
+		 		dotnet build ${API_SOLUTION} -p:Configration=release -v:n
+				'''
+			} 
+		} 
+		
+		stage('Dotnet Test') 
+		{ 
+			steps 
+			{ 
+				powershell '''dotnet test ${TEST_PROJECT_PATH}'''
+			} 
+		}
+		
+		stage('Compress') 
 		{
             		steps 
 			{
@@ -74,14 +101,6 @@ pipeline
 				powershell '''expand-archive artifactFiles.zip ${PATH_TO_UNZIP_ARTIFACT} -Force'''
             		}
         	}*/
-		
-		stage('Deploy') 
-		{
-            		steps 
-			{
-				powershell '''docker run -p 5000:80 dockerimage '''
-            		}
-        	}
 	} 
 	
 }
