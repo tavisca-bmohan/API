@@ -51,7 +51,7 @@ pipeline
 			{
 				bat '''
 				echo --------------Deploy Started------------------------
-				docker run -p 5000:80 dockerimage 
+				docker run -p 5500:80 dockerimage 
 				'''
             		}
         	}
