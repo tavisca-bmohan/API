@@ -31,7 +31,7 @@ pipeline
 				echo --------------Build Complete------------------------
 				
 				echo --------------Test Started------------------------
-				dotnet test ${TEST_PROJECT_PATH}
+				dotnet test ${API_SOLUTION}
 				dotnet C:\sonar\SonarScanner.MSBuild.dll end /d:sonar.login="ab12ede3c9b0cf6ba28158452937ba65ba1f271a"
 				echo --------------Test Complete------------------------
 				
