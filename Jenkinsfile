@@ -26,12 +26,12 @@ pipeline
 				bat '''
 				echo --------------Build Started------------------------
 				dotnet C:/sonar/SonarScanner.MSBuild.dll begin /k:"api" /d:sonar.host.url="http://localhost:9000" /d:sonar.login="ab12ede3c9b0cf6ba28158452937ba65ba1f271a"
-				dotnet restore ${API_SOLUTION} --source https://api.nuget.org/v3/index.json
+				dotnet restore %API_SOLUTION% --source https://api.nuget.org/v3/index.json
 				docker build --tag=dockerimage .
 				echo --------------Build Complete------------------------
 				
 				echo --------------Test Started------------------------
-				dotnet test ${API_SOLUTION}
+				dotnet test %API_SOLUTION%
 				dotnet C:/sonar/SonarScanner.MSBuild.dll end /d:sonar.login="ab12ede3c9b0cf6ba28158452937ba65ba1f271a"
 				echo --------------Test Complete------------------------
 				
