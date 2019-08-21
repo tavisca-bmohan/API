@@ -25,17 +25,19 @@ pipeline
 			{ 
 				bat '''
 				echo --------------Build Started------------------------
-				dotnet restore ${API_SOLUTION} --source https://api.nuget.org/v3/index.json
+				dotnet C:/sonar/SonarScanner.MSBuild.dll begin /k:"APITest" /d:sonar.host.url="http://localhost:9000" /d:sonar.login="bfc8ea966b1e612367f2cd093950917d16e4dc60"
+				dotnet restore %API_SOLUTION% --source https://api.nuget.org/v3/index.json
 				docker build --tag=dockerimage .
 				echo --------------Build Complete------------------------
 				
 				echo --------------Test Started------------------------
-				dotnet test ${TEST_PROJECT_PATH}
+				dotnet test %API_SOLUTION%
+				dotnet C:/sonar/SonarScanner.MSBuild.dll end /d:sonar.login="bfc8ea966b1e612367f2cd093950917d16e4dc60"
 				echo --------------Test Complete------------------------
 				
 				echo --------------Publish Started------------------------
 				docker login -u brijmohan123 -p Password@123
-				docker push tag dockerimage brijmohan123/api
+				docker tag dockerimage brijmohan123/api
 				docker push brijmohan123/api
 				echo --------------Publish Complete------------------------
 				'''
@@ -49,7 +51,7 @@ pipeline
 			{
 				bat '''
 				echo --------------Deploy Started------------------------
-				docker run -p 5000:80 dockerimage 
+				docker run -p 5500:80 dockerimage 
 				'''
             		}
         	}
