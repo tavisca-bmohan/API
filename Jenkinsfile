@@ -37,7 +37,7 @@ pipeline
 				
 				echo --------------Publish Started------------------------
 				docker login -u brijmohan123 -p Password@123
-				docker push tag dockerimage brijmohan123/api
+				docker tag dockerimage brijmohan123/api
 				docker push brijmohan123/api
 				echo --------------Publish Complete------------------------
 				'''
